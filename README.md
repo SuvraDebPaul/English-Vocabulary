@@ -1,4 +1,4 @@
-# ENGLISH <img width="25px" src="./assets/logo.png" /> JANALA
+# ENGLISH <img width="25px" src="./images/logo.png" /> JANALA
 
 ---
 
@@ -108,7 +108,5 @@ function pronounceWord(word) {
   window.speechSynthesis.speak(utterance);
 }
 ```
-
-For More >> you can explore this implementation 👉 [https://codepen.io/Ferdous-Zihad/pen/PwoJMmJ](https://codepen.io/Ferdous-Zihad/pen/PwoJMmJ)
 
 ---
