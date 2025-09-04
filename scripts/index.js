@@ -4,6 +4,11 @@ const createElements = (arr) => {
   });
   return htmlInput.join(" ");
 };
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
 
 const manageSpinner = (status) => {
   if (status) {
@@ -125,6 +130,7 @@ const displayLevelWords = (words) => {
             <i class="fa-solid fa-circle-info text-xl"></i>
           </button>
           <button
+          onclick="pronounceWord('${word.word}')"
             type="button"
             title="Pronunciation"
             class="btn outline-none bg-[#1A91FF20] hover:bg-[#1A91FF80]"
