@@ -155,3 +155,20 @@ const displayLessons = (lessons) => {
 };
 
 loadLessons();
+
+document.getElementById("btn-search").addEventListener("click", (e) => {
+  removeActive();
+  const inputValue = document
+    .getElementById("input-search")
+    .value.trim()
+    .toLowerCase();
+  fetch("https://openapi.programming-hero.com/api/words/all")
+    .then((res) => res.json())
+    .then((data) => {
+      const allWords = data.data;
+      const filterWords = allWords.filter((word) =>
+        word.word.toLowerCase().includes(inputValue)
+      );
+      displayLevelWords(filterWords);
+    });
+});
