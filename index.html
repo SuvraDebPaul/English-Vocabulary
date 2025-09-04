@@ -35,7 +35,13 @@
         <div class="navbar w-11/12 mx-auto">
           <div class="navbar-start">
             <div class="dropdown">
-              <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+              <div
+                tabindex="0"
+                role="button"
+                class="btn btn-ghost lg:hidden"
+                aria-label="Open menu"
+                title="Open menu"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-5 w-5"
@@ -157,34 +163,27 @@
           <span class="text-sky-500">Let's</span> Learn Vocabulary
         </h2>
       </div>
-      <div class="lesson-button text-sm">
-        <button class="btn btn-outline btn-primary">
-          <span><i class="fa-solid fa-book-open"></i></span>Lessons - 1
-        </button>
-        <button class="btn btn-outline btn-primary">
-          <span><i class="fa-solid fa-book-open"></i></span>Lessons - 2
-        </button>
-        <button class="btn btn-outline btn-primary">
-          <span><i class="fa-solid fa-book-open"></i></span>Lessons - 3
-        </button>
-        <button class="btn btn-outline btn-primary">
-          <span><i class="fa-solid fa-book-open"></i></span>Lessons - 4
-        </button>
-        <button class="btn btn-outline btn-primary">
-          <span><i class="fa-solid fa-book-open"></i></span>Lessons - 5
-        </button>
-        <button class="btn btn-outline btn-primary">
-          <span><i class="fa-solid fa-book-open"></i></span>Lessons - 6
-        </button>
-        <button class="btn btn-outline btn-primary">
-          <span><i class="fa-solid fa-book-open"></i></span>Lessons - 7
-        </button>
-      </div>
       <div
-        class="vocabulary-content bg-[#F8F8F8] h-[30vh] w-full flex flex-col justify-center items-center"
+        id="lesson-container"
+        class="text-sm flex flex-wrap justify-center items-center gap-2"
       >
-        <p>আপনি এখনো কোন Lesson Select করেন ন</p>
-        <h2>একটি Lesson Select করুন।</h2>
+        <!-- Inserting Trough JS API CALL -->
+      </div>
+    </section>
+    <!-- Content According to Level -->
+    <section
+      id="word-container"
+      class="bg-gray-300 p-10 w-11/12 mx-auto my-10 grid grid-cols-3 gap-5 rounded-xl"
+    >
+      <div class="text-center col-span-full">
+        <p class="text- text-gray-400">
+          <span class="font-bangla">আপনি এখনো কোন </span>Lesson Select
+          <span class="font-bangla">করেন ন</span>
+        </p>
+        <h2 class="text-3xl font-bold mt-5">
+          <span class="font-bangla">একটি </span>Lesson Select
+          <span class="font-bangla"> করুন।</span>
+        </h2>
       </div>
     </section>
     <!-- Scripts JS Files  -->
