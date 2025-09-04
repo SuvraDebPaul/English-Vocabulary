@@ -1,3 +1,19 @@
+const createElements = (arr) => {
+  const htmlInput = arr.map((element) => {
+    return `<p class="px-5 py-2 bg-blue-100">${element}</p>`;
+  });
+  return htmlInput.join(" ");
+};
+
+const manageSpinner = (status) => {
+  if (status) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("word-container").classList.add("hidden");
+  } else {
+    document.getElementById("spinner").classList.add("hidden");
+    document.getElementById("word-container").classList.remove("hidden");
+  }
+};
 const loadLessons = () => {
   fetch("https://openapi.programming-hero.com/api/levels/all")
     .then((res) => res.json())
@@ -5,6 +21,7 @@ const loadLessons = () => {
 };
 
 const loadLevelWord = (id) => {
+  manageSpinner(true);
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -18,10 +35,53 @@ const loadLevelWord = (id) => {
 //Remove Active Class From Btn
 const removeActive = () => {
   const lessonBtn = document.querySelectorAll(".lesson-button");
-  console.log(lessonBtn);
   lessonBtn.forEach((btn) => {
     btn.classList.remove("active");
   });
+};
+const loadWordDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  const res = await fetch(url);
+  const details = await res.json();
+  displayWordDetails(details.data);
+};
+//my_modal_2.showModal();
+
+const displayWordDetails = (word) => {
+  const detailsBox = document.getElementById("details-container");
+  detailsBox.innerHTML = `
+            <div class="modal-content mb-5 space-y-3">
+            <div>
+              <h2 class="text-3xl font-semibold">
+                ${word.word}
+                <span
+                  >(<i class="fa-solid fa-microphone-lines"></i>
+                  ${word.pronunciation}</span
+                >)
+              </h2>
+            </div>
+            <div class="space-y-1">
+              <p class="text-2xl font-semibold">Meaning</p>
+              <p>${word.meaning}</p>
+            </div>
+            <div class="space-y-1">
+              <p class="text-2xl font-semibold">Example</p>
+              <p>${word.sentence}</p>
+            </div>
+            <div class="space-y-1">
+              <p class="font-bangla text-2xl font-semibold">
+                সমার্থক শব্দ গুলো
+              </p>
+              <div class="flex gap-2">
+              ${createElements(word.synonyms)}
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary">
+            Complete Learning
+          </button>
+  `;
+  document.getElementById("wordModal").showModal();
 };
 //Display Data of thr Cards
 const displayLevelWords = (words) => {
@@ -41,10 +101,10 @@ const displayLevelWords = (words) => {
         </h2>
       </div>
     `;
+    manageSpinner(false);
     return;
   }
   words.forEach((word) => {
-    console.log(word);
     const card = document.createElement("div");
     card.innerHTML = `
     <div class="bg-white py-10 px-5 text-center     rounded-xl">
@@ -59,6 +119,7 @@ const displayLevelWords = (words) => {
           <button
             type="button"
             title="More Info"
+            onclick="loadWordDetails(${word.id})"
             class="btn outline-none bg-[#1A91FF20] hover:bg-[#1A91FF80]"
           >
             <i class="fa-solid fa-circle-info text-xl"></i>
@@ -75,6 +136,7 @@ const displayLevelWords = (words) => {
     `;
     wordContainer.append(card);
   });
+  manageSpinner(false);
 };
 //Lesson Button Dynamic Push
 const displayLessons = (lessons) => {
